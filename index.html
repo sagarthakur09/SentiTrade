@@ -9,52 +9,90 @@
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:Calibri,"Segoe UI",system-ui,sans-serif;line-height:1.4}
-header{background:#111;color:#f5c518;padding:14px 20px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;border-bottom:5px solid var(--y)}
-header h1{margin:0;font-size:20px;letter-spacing:.5px}header small{color:#fff;display:block;font-size:12px;font-weight:400}
+:focus-visible{outline:3px solid #2a6df4;outline-offset:2px}
+header{background:#111;color:#f5c518;padding:14px 20px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+header h1{margin:0;font-size:20px;letter-spacing:.5px;display:flex;gap:10px;align-items:center}header small{color:#fff;display:block;font-size:12px;font-weight:400}
 .ctl{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 select,button,input{font:inherit}
 select{padding:7px 10px;border:2px solid var(--y);background:#111;color:#fff;border-radius:6px}
+.hb{background:transparent;color:#fff;border:2px solid var(--y);border-radius:6px;padding:6px 10px;cursor:pointer;font-size:13px;transition:background .2s,color .2s}.hb:hover,.hb.on{background:var(--y);color:#111}
 .live{color:#fff;font-size:12px;display:flex;align-items:center;gap:6px}.dot{width:9px;height:9px;border-radius:50%;background:var(--y);animation:p 1.2s infinite}@keyframes p{50%{opacity:.25}}
-main{max-width:1100px;margin:0 auto;padding:16px}
+.tape{background:var(--y);color:#111;overflow:hidden;white-space:nowrap;font-size:13px;font-weight:700;animation:drop .6s ease-out}
+.track{display:inline-block;padding:6px 0;animation:tp 34s linear infinite}.tape:hover .track{animation-play-state:paused}.track span{margin:0 20px}
+@keyframes tp{to{transform:translateX(-50%)}}@keyframes drop{from{transform:translateY(-100%)}}
+main{max-width:1200px;margin:0 auto;padding:16px}
 .grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin-bottom:14px}
 .card{background:var(--card);border:1.5px solid var(--line);border-top:5px solid var(--y);border-radius:8px;padding:14px;min-width:0}
 .card h2{margin:0 0 8px;font-size:15px}
-.kpi .l{font-size:12px;color:var(--mut)}.kpi .v{font-size:26px;font-weight:700}.kpi .s{font-size:12px;color:var(--mut)}
+.hd{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px}.hd h2{margin:0}
+.kpi .l{font-size:12px;color:var(--mut)}.kpi .v{font-size:28px;font-weight:700;font-variant-numeric:tabular-nums}.kpi .s{font-size:12px;color:var(--mut)}
+.row{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.fu{animation:fu .9s}.fd{animation:fd .9s}@keyframes fu{from{color:#1fa855}}@keyframes fd{from{color:#e5484d}}
+.spark{width:100%;height:32px;margin-top:6px;overflow:visible}.spark path{fill:none;stroke:var(--ink);stroke-width:2;vector-effect:non-scaling-stroke;stroke-dasharray:1;stroke-dashoffset:1;animation:dr 1.4s ease forwards}@keyframes dr{to{stroke-dashoffset:0}}
+.gauge{width:120px;flex:none}.gauge path{fill:none;stroke-width:10}.gauge line{stroke:var(--ink);stroke-width:3;stroke-linecap:round;transform:rotate(-90deg);transform-origin:60px 60px;transition:transform 1.4s cubic-bezier(.2,1.4,.4,1)}
+.ringw{position:relative;width:64px;height:64px;flex:none}.ringw span{position:absolute;inset:0;display:grid;place-items:center;font-weight:700;font-size:14px}
+.rt,#ring{fill:none;stroke-width:7}.rt{stroke:var(--line)}#ring{stroke:var(--ink);stroke-linecap:round;stroke-dasharray:163.4;stroke-dashoffset:163.4;transform:rotate(-90deg);transform-origin:32px 32px;transition:stroke-dashoffset 1.3s ease}
+.pipe{display:flex;gap:8px;flex-wrap:wrap}
+.st{flex:1 1 200px;display:flex;gap:10px;align-items:center;padding:10px;border:1.5px solid var(--line);border-radius:8px;font-size:12px;animation:lit 8s infinite;animation-delay:calc(var(--i)*2s)}
+.st b{width:26px;height:26px;border-radius:50%;background:#111;color:var(--y);display:grid;place-items:center;flex:none}.st strong{display:block;font-size:13px}
+@keyframes lit{0%,22%{background:var(--y);color:#111;border-color:#111}30%,100%{background:transparent;color:var(--ink)}}
 .wide{grid-column:span 2}@media(max-width:640px){.wide{grid-column:span 1}}
 .cv{position:relative;height:250px}
-.badge{display:inline-block;padding:1px 8px;border-radius:10px;font-size:11px;font-weight:700}
+.seg{display:flex;gap:4px}.seg button{border:1.5px solid var(--ink);background:transparent;color:var(--ink);border-radius:12px;padding:2px 9px;font-size:12px;cursor:pointer}.seg button.on{background:var(--ink);color:var(--bg)}
+.badge{display:inline-block;padding:1px 8px;border-radius:10px;font-size:11px;font-weight:700;white-space:nowrap}
 .pos{background:var(--y);color:#111}.neg{background:var(--negbg);color:var(--negink)}.neu{background:var(--neubg);color:var(--neuink)}
 ul{list-style:none;margin:0;padding:0}li.n{padding:7px 0;border-bottom:1px solid var(--line);font-size:13px;display:flex;justify-content:space-between;gap:8px;align-items:flex-start}
+.fresh{animation:inn .8s}@keyframes inn{from{opacity:0;transform:translateY(-10px);background:var(--y)}}
+table{width:100%;border-collapse:collapse;font-size:13px}th{text-align:left;color:var(--mut);font-weight:600;padding:4px 6px}td{padding:8px 6px;border-top:1px solid var(--line);font-variant-numeric:tabular-nums}td small{display:block;color:var(--mut)}
+tr.r{cursor:pointer}tr.r:hover,tr.r:focus-visible{background:rgba(245,197,24,.2)}tr.act td:first-child{box-shadow:inset 4px 0 var(--y)}.tw{overflow-x:auto}
 .inrow{display:flex;gap:6px;margin-top:6px}
 input[type=text]{flex:1;min-width:0;padding:8px;border:2px solid var(--ink);border-radius:6px;background:var(--bg);color:var(--ink)}
 .btn{background:var(--y);color:#111;border:2px solid #111;border-radius:6px;padding:7px 12px;font-weight:700;cursor:pointer}
+.hw{min-height:44px;margin-top:10px;font-size:15px;line-height:1.8}.hw span.hp{background:var(--y);color:#111;border-radius:3px;padding:1px 3px}.hw span.hn{background:var(--ink);color:var(--bg);border-radius:3px;padding:1px 3px}
+.meter{position:relative;height:10px;border-radius:5px;margin:14px 0 4px;background:linear-gradient(90deg,var(--ink),#999,var(--y))}.meter i{position:absolute;top:-5px;left:50%;width:6px;height:20px;margin-left:-3px;border-radius:3px;background:var(--bg);border:2px solid var(--ink);transition:left .5s cubic-bezier(.2,1.4,.4,1)}
+.ml{display:flex;justify-content:space-between;font-size:11px;color:var(--mut)}
 .chat{height:300px;overflow-y:auto;display:flex;flex-direction:column;gap:6px;padding:6px 0}
-.m{max-width:85%;padding:8px 11px;border-radius:10px;font-size:13px;white-space:pre-wrap}
+.m{max-width:85%;padding:8px 11px;border-radius:10px;font-size:13px;white-space:pre-wrap;animation:inn .3s}
 .me{align-self:flex-end;background:var(--y);color:#111}.bot{align-self:flex-start;background:var(--botbg);color:var(--botink)}
-.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}.chip{font-size:12px;padding:4px 9px;border:1.5px solid var(--ink);background:transparent;color:var(--ink);border-radius:14px;cursor:pointer}
-.bar{height:12px;background:var(--line);border-radius:6px;overflow:hidden;margin:3px 0 10px}.bar i{display:block;height:100%;background:var(--y)}
+.typing{display:flex;gap:4px;padding:12px}.typing i{width:6px;height:6px;border-radius:50%;background:#fff;animation:p .9s infinite}.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}.chip{font-size:12px;padding:4px 9px;border:1.5px solid var(--ink);background:transparent;color:var(--ink);border-radius:14px;cursor:pointer;transition:background .2s}.chip:hover{background:var(--y);color:#111}
+.bar{height:12px;background:var(--line);border-radius:6px;overflow:hidden;margin:3px 0 10px}.bar i{display:block;height:100%;width:0;background:var(--y);transition:width 1.1s cubic-bezier(.2,.8,.2,1)}
 .disc{font-size:12px;color:var(--mut);margin:6px 0 0}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.spark path{stroke-dashoffset:0!important}}
 </style></head><body>
-<header><div><h1>SENTITRADE <small>Stock sentiment analysis, prediction and chatbot (prototype with simulated data)</small></h1></div>
-<div class="ctl"><label for="sym" style="color:#fff;font-size:13px">Stock</label><select id="sym"></select><span class="live"><span class="dot"></span>LIVE (simulated)</span></div></header>
+<header><div><h1><svg width="24" height="24" viewBox="0 0 22 22" aria-hidden="true"><path d="M4 2v18M11 4v16M18 1v15" stroke="#f5c518" stroke-width="2"/><rect x="2" y="6" width="4" height="8" fill="#f5c518"/><rect x="9" y="9" width="4" height="7" fill="#f5c518"/><rect x="16" y="4" width="4" height="7" fill="#f5c518"/></svg><span>SENTITRADE <small>Stock sentiment analysis, prediction and chatbot (prototype with simulated data)</small></span></h1></div>
+<div class="ctl"><label for="sym" style="color:#fff;font-size:13px">Stock</label><select id="sym"></select><button class="hb" id="demo">Auto demo</button><button class="hb" id="th">Theme</button><button class="hb" id="csv">Export CSV</button><span class="live"><span class="dot"></span>LIVE (simulated)</span><span class="live" id="be">Backend: offline</span></div></header>
+<div class="tape" aria-label="Market ticker"><div class="track" id="tape"></div></div>
 <main>
 <div class="grid">
-<div class="card kpi"><div class="l">Live price</div><div class="v" id="k1">-</div><div class="s" id="k1s"></div></div>
-<div class="card kpi"><div class="l">Sentiment (FinBERT-style)</div><div class="v" id="k2">-</div><div class="s" id="k2s"></div></div>
-<div class="card kpi"><div class="l">Next-day signal</div><div class="v" id="k3">-</div><div class="s" id="k3s"></div></div>
-<div class="card kpi"><div class="l">Backtest direction accuracy</div><div class="v" id="k4">-</div><div class="s" id="k4s"></div></div>
+<div class="card kpi"><div class="l">Live price</div><div class="v" id="k1">-</div><div class="s" id="k1s"></div><svg class="spark" id="spark" viewBox="0 0 100 28" preserveAspectRatio="none" aria-hidden="true"></svg></div>
+<div class="card kpi"><div class="l">Sentiment (FinBERT-style)</div><div class="row"><div><div class="v" id="k2">-</div><div class="s" id="k2s"></div></div>
+<svg class="gauge" viewBox="0 0 120 70" aria-hidden="true"><path d="M10 60A50 50 0 0 1 35 16.7" stroke="var(--ink)"/><path d="M35 16.7A50 50 0 0 1 85 16.7" stroke="#999"/><path d="M85 16.7A50 50 0 0 1 110 60" stroke="#f5c518"/><line id="needle" x1="60" y1="60" x2="60" y2="22"/><circle cx="60" cy="60" r="5" fill="var(--ink)"/></svg></div></div>
+<div class="card kpi"><div class="l">Next-day signal</div><div class="row"><div><div class="v" id="k3">-</div><div class="s" id="k3s"></div></div>
+<div class="ringw"><svg viewBox="0 0 64 64" aria-hidden="true"><circle class="rt" cx="32" cy="32" r="26"/><circle id="ring" cx="32" cy="32" r="26"/></svg><span id="k3c"></span></div></div></div>
+<div class="card kpi"><div class="l">Backtest direction accuracy</div><div class="v" id="k4">-</div><div class="s" id="k4s"></div><div class="bar" style="margin-top:10px"><i id="k4b"></i></div></div>
 </div>
+<div class="card" style="margin-bottom:14px"><h2>How a signal is made</h2><div class="pipe">
+<div class="st" style="--i:0"><b>1</b><div><strong>Collect headlines</strong>News for the chosen stock</div></div>
+<div class="st" style="--i:1"><b>2</b><div><strong>Score sentiment</strong>Each headline rated from -1 to +1</div></div>
+<div class="st" style="--i:2"><b>3</b><div><strong>Fit the model</strong>Links yesterday's mood to today's return</div></div>
+<div class="st" style="--i:3"><b>4</b><div><strong>Next-day signal</strong>UP or DOWN with a confidence level</div></div></div></div>
 <div class="grid">
-<div class="card wide"><h2>Price, moving average and predicted next close</h2><div class="cv"><canvas id="c1"></canvas></div></div>
+<div class="card wide"><div class="hd"><h2>Price, moving average and predicted next close</h2><div class="seg"><button data-n="7">7D</button><button data-n="15">15D</button><button data-n="30" class="on">30D</button></div></div><div class="cv"><canvas id="c1"></canvas></div></div>
 <div class="card"><h2>Daily sentiment score</h2><div class="cv"><canvas id="c2"></canvas></div></div>
 </div>
 <div class="grid">
-<div class="card"><h2>Latest news and sentiment</h2><ul id="news"></ul></div>
-<div class="card"><h2>Try the sentiment analyzer</h2><div style="font-size:13px">Type any headline. A word-based scorer stands in for FinBERT here.</div>
-<div class="inrow"><input type="text" id="hl" placeholder="e.g. Company posts record profit, upgrades outlook"><button class="btn" id="go">Score</button></div><div id="hr" style="margin-top:10px;font-size:14px"></div>
+<div class="card wide"><h2>Watchlist (click a row to switch stock)</h2><div class="tw"><table><thead><tr><th>Stock</th><th>Price</th><th>Today</th><th>Mood</th><th>Signal</th></tr></thead><tbody id="wl"></tbody></table></div></div>
+<div class="card"><h2>Headline mix</h2><div class="cv" style="height:200px"><canvas id="c3"></canvas></div></div>
+</div>
+<div class="grid">
+<div class="card"><h2>Latest news and sentiment <span class="badge pos">live</span></h2><ul id="news"></ul></div>
+<div class="card"><h2>Try the sentiment analyzer</h2><div style="font-size:13px">Type any headline. A word-based scorer stands in for FinBERT here, and the words it picks up are highlighted.</div>
+<div class="inrow"><input type="text" id="hl" placeholder="e.g. Company posts record profit, upgrades outlook"><button class="btn" id="go">Score</button></div>
+<div class="chips" id="ex"></div><div class="hw" id="hw"></div><div class="meter"><i id="mk"></i></div><div class="ml"><span>Negative</span><span>Neutral</span><span>Positive</span></div><div id="hr" style="margin-top:8px;font-size:14px"></div>
 <h2 style="margin-top:16px">Model comparison (walk-forward backtest)</h2><div id="perf"></div>
 <p class="disc">Predictions are decision-support signals, not financial advice. All data here is simulated.</p></div>
-<div class="card"><h2>Chatbot assistant</h2><div class="chat" id="chat"></div>
+<div class="card"><h2>Chatbot assistant</h2><div class="chat" id="chat" aria-live="polite"></div>
 <div class="inrow"><input type="text" id="q" placeholder="Ask: what is the sentiment for TSLA?"><button class="btn" id="send">Send</button></div>
 <div class="chips" id="chips"></div></div>
 </div>
@@ -85,44 +123,92 @@ function rng(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15
 function score(t){const w=t.toLowerCase().match(/[a-z]+/g)||[];let p=0,n=0;w.forEach(x=>{if(POS.includes(x))p++;if(NEG.includes(x))n++});return (p+n)?(p-n)/(p+n)*Math.min(1,0.45+0.2*(p+n)):0}
 const lab=s=>s>0.15?'pos':s<-0.15?'neg':'neu';const nm={pos:'Positive',neg:'Negative',neu:'Neutral'};
 function fit(x,y){const n=x.length,mx=x.reduce((a,b)=>a+b)/n,my=y.reduce((a,b)=>a+b)/n;let sxy=0,sxx=0,syy=0;for(let i=0;i<n;i++){sxy+=(x[i]-mx)*(y[i]-my);sxx+=(x[i]-mx)**2;syy+=(y[i]-my)**2}const b=sxx?sxy/sxx:0;return{a:my-b*mx,b,r:(sxx&&syy)?sxy/Math.sqrt(sxx*syy):0}}
-function build(sym){const[ , base,seed]=ST[sym],R=rng(seed),N=30;let v=0,s=[],c=[],ret=[0],p=base;
+function build(sym,real){const[ , base,seed]=ST[sym],R=rng(seed),N=30;let v=0,s=[],c=[],ret=[0],p=base;
  for(let i=0;i<N;i++){v=0.6*v+(R()-0.5)*0.9;v=Math.max(-0.9,Math.min(0.9,v));s.push(v);const r=i?0.012*s[i-1]+(R()-0.5)*0.012:0;if(i)ret.push(r);p*=1+r;c.push(+p.toFixed(2))}
+ if(real){c=real.slice(-N);ret=c.map((x,i)=>i?x/c[i-1]-1:0)}
  const sma=c.map((_,i)=>i<4?null:+(c.slice(i-4,i+1).reduce((a,b)=>a+b)/5).toFixed(2));
  const X=s.slice(0,N-1),Y=ret.slice(1),m=fit(X,Y),pred=m.a+m.b*s[N-1];
  let okS=0,okB=0,cnt=0;for(let k=10;k<N-1;k++){const f=fit(X.slice(0,k),Y.slice(0,k));const ps=f.a+f.b*X[k];if(Math.sign(ps)===Math.sign(Y[k]))okS++;if(Math.sign(ret[k])===Math.sign(Y[k]))okB++;cnt++}
  const names=ST[sym][0],H=[];for(let i=0;i<8;i++){const x=R(),k=x<0.5+s[N-1]/2?'p':(R()<0.5?'n':'u'),a=T[k];const t=a[Math.floor(R()*a.length)].replace('{C}',names);H.push([t,score(t)])}
  const conf=Math.round(Math.min(82,50+Math.abs(m.r)*30+Math.abs(pred)*1500));
- return{sym,s,c,sma,pred,predPx:+(c[N-1]*(1+pred)).toFixed(2),conf,acc:Math.round(okS/cnt*100),base:Math.round(okB/cnt*100),H,r:m.r,live:c[N-1]}}
-const sel=document.getElementById('sym');Object.keys(ST).forEach(k=>sel.add(new Option(k+' - '+ST[k][0],k)));
-let D,ch=[];const $=id=>document.getElementById(id);const css=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
-function render(){D=build(sel.value);const{s,c}=D,last=s[s.length-1],chg=(c[29]/c[28]-1)*100;
- $('k1').textContent=D.live.toFixed(2);$('k1s').textContent=(chg>=0?'+':'')+chg.toFixed(2)+'% vs yesterday';
- $('k2').textContent=(last>=0?'+':'')+last.toFixed(2);$('k2s').textContent=nm[lab(last)]+' mood across latest posts';
- $('k3').textContent=D.pred>=0?'UP':'DOWN';$('k3s').textContent='Confidence '+D.conf+'% | target '+D.predPx;
- $('k4').textContent=D.acc+'%';$('k4s').textContent='Momentum baseline: '+D.base+'%';
- $('news').innerHTML='';D.H.forEach(([t,sc])=>{const li=document.createElement('li');li.className='n';const a=document.createElement('span');a.textContent=t;const b=document.createElement('span');b.className='badge '+lab(sc);b.textContent=nm[lab(sc)]+' '+sc.toFixed(2);li.append(a,b);$('news').append(li)});
- $('perf').innerHTML='<div style="font-size:13px">Price + sentiment model: <b>'+D.acc+'%</b></div><div class="bar"><i style="width:'+D.acc+'%"></i></div><div style="font-size:13px">Price-only momentum baseline: <b>'+D.base+'%</b></div><div class="bar"><i style="width:'+D.base+'%;background:var(--mut)"></i></div>';
- ch.forEach(x=>x.destroy());const ink=css('--ink'),grid=css('--line'),Y='#f5c518';const L=c.map((_,i)=>'D'+(i+1)).concat('Next');
- const ax={ticks:{color:ink,maxTicksLimit:8},grid:{color:grid}};Chart.defaults.font.family='Calibri,sans-serif';
- const pad=Array(29).fill(null);
- ch=[new Chart($('c1'),{type:'line',data:{labels:L,datasets:[{label:'Close',data:c.concat(null),borderColor:ink,backgroundColor:ink,borderWidth:2.5,pointRadius:0,tension:.25},{label:'SMA(5)',data:D.sma.concat(null),borderColor:Y,backgroundColor:Y,borderWidth:2.5,pointRadius:0,tension:.25},{label:'Predicted',data:pad.concat([c[29],D.predPx]),borderColor:Y,backgroundColor:Y,borderDash:[5,4],borderWidth:3,pointRadius:[0,5]}]},options:{maintainAspectRatio:false,scales:{x:ax,y:ax},plugins:{legend:{labels:{color:ink}}}}}),
- new Chart($('c2'),{type:'bar',data:{labels:L.slice(0,30),datasets:[{label:'Sentiment',data:s.map(x=>+x.toFixed(2)),backgroundColor:s.map(x=>x>=0?Y:ink),borderColor:ink,borderWidth:1}]},options:{maintainAspectRatio:false,scales:{x:ax,y:{...ax,min:-1,max:1}},plugins:{legend:{display:false}}}})]}
+ return{sym,s,c,sma,pred,predPx:+(c[N-1]*(1+pred)).toFixed(2),conf,acc:Math.round(okS/cnt*100),base:Math.round(okB/cnt*100),H,r:m.r,live:c[N-1],px:c[N-1]}}
+
+const KEYS=Object.keys(ST),ALL={};KEYS.forEach(k=>ALL[k]=build(k));
+const sel=document.getElementById('sym');KEYS.forEach(k=>sel.add(new Option(k+' - '+ST[k][0],k)));
+const $$=id=>document.getElementById(id),css=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const sg=(x,d=2)=>(x>=0?'+':'')+x.toFixed(d),chgOf=o=>(o.live/o.c[28]-1)*100,Y='#f5c518';
+const still=()=>matchMedia('(prefers-reduced-motion:reduce)').matches;
+let D=ALL[KEYS[0]],cP,cS,cM,span=30,demo=null;
+
+function count(el,to,d=0,suf='',plus=0){const from=el._v||0,t0=performance.now(),dur=still()?0:900;el._v=to;
+ (function f(t){const k=dur?Math.min(1,(t-t0)/dur):1,v=from+(to-from)*(1-Math.pow(1-k,3));el.textContent=(plus&&v>=0?'+':'')+v.toFixed(d)+suf;if(k<1)requestAnimationFrame(f)})(t0)}
+function spark(c){const mn=Math.min(...c),mx=Math.max(...c);return '<path pathLength="1" d="'+c.map((v,i)=>(i?'L':'M')+(i/(c.length-1)*100).toFixed(1)+' '+(26-(v-mn)/(mx-mn||1)*24).toFixed(1)).join('')+'"/>'}
+const cnt=()=>['pos','neu','neg'].map(l=>D.H.filter(h=>lab(h[1])===l).length);
+const axs=()=>({ticks:{color:css('--ink'),maxTicksLimit:8},grid:{color:css('--line')}});
+function badge(sc){const b=document.createElement('span');b.className='badge '+lab(sc);b.textContent=nm[lab(sc)]+' '+sc.toFixed(2);return b}
+
+function drawPrice(){cP&&cP.destroy();const n=span,{c,sma,predPx}=D,ink=css('--ink'),ax=axs(),L=c.map((_,i)=>'D'+(i+1)).slice(-n).concat('Next');
+ cP=new Chart($$('c1'),{type:'line',data:{labels:L,datasets:[
+ {label:'Close',data:c.slice(-n).concat(null),borderColor:ink,backgroundColor:ink,borderWidth:2.5,pointRadius:0,tension:.25},
+ {label:'SMA(5)',data:sma.slice(-n).concat(null),borderColor:Y,backgroundColor:Y,borderWidth:2.5,pointRadius:0,tension:.25},
+ {label:'Predicted',data:Array(n-1).fill(null).concat([c[29],predPx]),borderColor:Y,backgroundColor:Y,borderDash:[5,4],borderWidth:3,pointRadius:x=>x.dataIndex===n?6:0}]},
+ options:{maintainAspectRatio:false,interaction:{mode:'index',intersect:false},scales:{x:axs(),y:axs()},plugins:{legend:{labels:{color:ink}}}}})}
+function charts(){const ink=css('--ink'),ax=axs();drawPrice();cS&&cS.destroy();cM&&cM.destroy();
+ cS=new Chart($$('c2'),{type:'bar',data:{labels:D.c.map((_,i)=>'D'+(i+1)),datasets:[{label:'Sentiment',data:D.s.map(x=>+x.toFixed(2)),backgroundColor:D.s.map(x=>x>=0?Y:ink),borderColor:ink,borderWidth:1}]},options:{maintainAspectRatio:false,scales:{x:ax,y:{...ax,min:-1,max:1}},plugins:{legend:{display:false}}}});
+ cM=new Chart($$('c3'),{type:'doughnut',data:{labels:['Positive','Neutral','Negative'],datasets:[{data:cnt(),backgroundColor:[Y,'#9a9a9a',ink],borderColor:css('--card'),borderWidth:3}]},options:{maintainAspectRatio:false,cutout:'62%',plugins:{legend:{position:'bottom',labels:{color:ink}}}}})}
+function news(f){const u=$$('news');u.innerHTML='';D.H.forEach(([t,sc],i)=>{const li=document.createElement('li');li.className='n'+(f&&!i?' fresh':'');const a=document.createElement('span');a.textContent=t;li.append(a,badge(sc));u.append(li)})}
+function perf(){$$('perf').innerHTML='<div style="font-size:13px">Price + sentiment model: <b>'+D.acc+'%</b></div><div class="bar"><i data-w="'+D.acc+'"></i></div><div style="font-size:13px">Price-only momentum baseline: <b>'+D.base+'%</b></div><div class="bar"><i data-w="'+D.base+'" style="background:var(--mut)"></i></div>';
+ setTimeout(()=>document.querySelectorAll('.bar i[data-w]').forEach(i=>i.style.width=i.dataset.w+'%'),80)}
+function chgTxt(){$$('k1s').textContent=sg(chgOf(D))+'% vs yesterday'}
+function tape(){const h=KEYS.map(k=>{const o=ALL[k],c=chgOf(o);return '<span>'+k+' '+o.live.toFixed(2)+' '+(c>=0?'▲':'▼')+Math.abs(c).toFixed(2)+'%</span>'}).join('');$$('tape').innerHTML=h+h}
+function wl(){const b=$$('wl');b.innerHTML='';KEYS.forEach(k=>{const o=ALL[k],c=chgOf(o),l=o.s[29],tr=document.createElement('tr');tr.className='r'+(k===D.sym?' act':'');tr.tabIndex=0;
+ tr.innerHTML='<td><b>'+k+'</b><small>'+ST[k][0]+'</small></td><td>'+o.live.toFixed(2)+'</td><td>'+(c>=0?'▲ ':'▼ ')+sg(c)+'%</td><td></td><td>'+(o.pred>=0?'UP':'DOWN')+' '+o.conf+'%</td>';
+ tr.children[3].append(badge(l));const go=()=>{sel.value=k;sel.onchange()};tr.onclick=go;tr.onkeydown=e=>{if(e.key==='Enter')go()};b.append(tr)})}
+function render(){D=ALL[sel.value];const{s,c}=D,last=s[29];
+ count($$('k1'),D.live,2);chgTxt();$$('spark').innerHTML=spark(c);
+ count($$('k2'),last,2,'',1);$$('k2s').textContent=nm[lab(last)]+' mood across latest posts';
+ $$('k3').textContent=(D.pred>=0?'UP ▲':'DOWN ▼');$$('k3s').textContent='Target '+D.predPx;count($$('k3c'),D.conf,0,'%');
+ count($$('k4'),D.acc,0,'%');$$('k4s').textContent='Momentum baseline: '+D.base+'%';
+ setTimeout(()=>{$$('needle').style.transform='rotate('+last*90+'deg)';$$('ring').style.strokeDashoffset=163.4*(1-D.conf/100);$$('k4b').style.width=D.acc+'%'},120);
+ news();perf();charts();wl();tape()}
+
 sel.onchange=()=>{render();say('Switched to '+sel.value+' ('+ST[sel.value][0]+').','bot')};
-matchMedia('(prefers-color-scheme: dark)').addEventListener('change',render);
-setInterval(()=>{if(!D)return;D.live=+(D.live*(1+(Math.random()-0.5)*0.002)).toFixed(2);$('k1').textContent=D.live.toFixed(2)},3000);
-$('go').onclick=()=>{const t=$('hl').value.trim();if(!t)return;const sc=score(t),l=lab(sc);$('hr').innerHTML='';const b=document.createElement('span');b.className='badge '+l;b.textContent=nm[l]+' ('+sc.toFixed(2)+')';$('hr').append('Result: ',b)};
-function say(t,w){const d=document.createElement('div');d.className='m '+w;d.textContent=t;$('chat').append(d);$('chat').scrollTop=1e9}
-function reply(q){q=q.toLowerCase();const f=Object.keys(ST).find(k=>q.includes(k.toLowerCase()));if(f&&sel.value!==f){sel.value=f;render()}
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change',charts);
+document.querySelectorAll('.seg button').forEach(b=>b.onclick=()=>{span=+b.dataset.n;document.querySelectorAll('.seg button').forEach(x=>x.classList.toggle('on',x===b));drawPrice()});
+$$('th').onclick=()=>{const r=document.documentElement;r.dataset.theme=getComputedStyle(r).colorScheme==='dark'?'light':'dark';charts()};
+$$('demo').onclick=()=>{if(demo){clearInterval(demo);demo=null}else demo=setInterval(()=>{sel.value=KEYS[(KEYS.indexOf(sel.value)+1)%KEYS.length];render()},6000);$$('demo').classList.toggle('on',!!demo);$$('demo').textContent=demo?'Stop demo':'Auto demo'};
+$$('csv').onclick=()=>{const r=['day,close,sma5,sentiment'];D.c.forEach((v,i)=>r.push([i+1,v,D.sma[i]??'',D.s[i].toFixed(3)].join(',')));const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([r.join('\n')],{type:'text/csv'}));a.download=D.sym+'_sentitrade.csv';a.click()};
+setInterval(()=>{KEYS.forEach(k=>{const o=ALL[k];o.px=o.live;o.live=+(o.live*(1+(Math.random()-0.5)*0.004)).toFixed(2)});
+ const e=$$('k1');e._v=D.live;e.textContent=D.live.toFixed(2);e.classList.remove('fu','fd');void e.offsetWidth;e.classList.add(D.live>=D.px?'fu':'fd');chgTxt();wl();tape()},3000);
+setInterval(()=>{const o=D,k=Math.random()<0.5+o.s[29]/2?'p':(Math.random()<.5?'n':'u'),a=T[k],t=a[Math.floor(Math.random()*a.length)].replace('{C}',ST[o.sym][0]);o.H.unshift([t,score(t)]);o.H.length=Math.min(o.H.length,8);news(true);cM.data.datasets[0].data=cnt();cM.update()},7000);
+
+let BE=null,tm;
+function paint(sc,src){$$('mk').style.left=(50+sc*50)+'%';const b=document.createElement('span');b.className='badge '+lab(sc);b.textContent=nm[lab(sc)]+' ('+sc.toFixed(2)+')';$$('hr').innerHTML='';if($$('hl').value.trim())$$('hr').append('Result: ',b,' via '+src)}
+function analyze(){const t=$$('hl').value,out=$$('hw');out.innerHTML='';
+ (t.match(/[A-Za-z']+|[^A-Za-z']+/g)||[]).forEach(w=>{const s=document.createElement('span'),l=w.toLowerCase();s.textContent=w;if(POS.includes(l))s.className='hp';else if(NEG.includes(l))s.className='hn';out.append(s)});
+ paint(score(t),'browser scorer');
+ if(BE&&t.trim()){clearTimeout(tm);tm=setTimeout(()=>fetch('/api/score?text='+encodeURIComponent(t)).then(r=>r.json()).then(j=>paint(j.score,j.model)).catch(()=>{}),250)}}
+async function api(){try{const j=await (await fetch('/api/status')).json();BE=j;$$('be').textContent='Backend: online ('+j.prices+')';
+ for(const k of KEYS){const d=await (await fetch('/api/stock/'+k)).json();if(d.source==='yfinance'&&d.close.length>=30)ALL[k]=build(k,d.close)}
+ render();analyze()}catch(e){}}
+$$('go').onclick=analyze;$$('hl').oninput=analyze;
+['Tesla posts record profit, shares rally','Probe and lawsuit trigger sharp decline','Board schedules annual meeting'].forEach(t=>{const b=document.createElement('button');b.className='chip';b.textContent=t;b.onclick=()=>{$$('hl').value=t;analyze()};$$('ex').append(b)});
+
+function say(t,w){const d=document.createElement('div');d.className='m '+w;d.textContent=t;$$('chat').append(d);$$('chat').scrollTop=1e9;return d}
+function reply(q){q=q.toLowerCase();const f=KEYS.find(k=>q.includes(k.toLowerCase()));if(f&&sel.value!==f){sel.value=f;render()}
  const last=D.s[29];
+ if(/compare|best|bullish|bearish|rank|which/.test(q)){const r=KEYS.map(k=>[k,ALL[k].s[29]]).sort((a,b)=>b[1]-a[1]);return 'Sentiment ranking right now:\n'+r.map(([k,v],i)=>(i+1)+'. '+k+' '+sg(v)+' ('+nm[lab(v)]+')').join('\n')+'\nMost positive: '+r[0][0]+'. Most negative: '+r[r.length-1][0]+'.'}
+ if(/help|what can you/.test(q))return 'Ask me about price, sentiment, news, predictions, model accuracy, or "which stock is most bullish?". Name a stock (AAPL, TSLA, TCS, INFY, RELIANCE) to switch to it.';
  if(/predict|forecast|tomorrow|trend|will/.test(q))return D.sym+' signal: '+(D.pred>=0?'UP':'DOWN')+' with '+D.conf+'% confidence. Expected next close about '+D.predPx+'. This is a decision-support signal, not advice.';
- if(/sentiment|mood|feel|opinion/.test(q))return D.sym+' sentiment is '+nm[lab(last)].toLowerCase()+' ('+(last>=0?'+':'')+last.toFixed(2)+'). Correlation between sentiment and next-day return: '+D.r.toFixed(2)+'.';
+ if(/sentiment|mood|feel|opinion/.test(q))return D.sym+' sentiment is '+nm[lab(last)].toLowerCase()+' ('+sg(last)+'). Correlation between sentiment and next-day return: '+D.r.toFixed(2)+'.';
  if(/news|headline/.test(q)){const t=D.H.slice(0,3).map(h=>'- '+h[0]+' ['+nm[lab(h[1])]+']').join('\n');return 'Latest headlines for '+D.sym+':\n'+t}
- if(/price|quote|trading|cost/.test(q))return D.sym+' is at '+D.live.toFixed(2)+' ('+((D.c[29]/D.c[28]-1)*100).toFixed(2)+'% today).';
+ if(/price|quote|trading|cost/.test(q))return D.sym+' is at '+D.live.toFixed(2)+' ('+sg(chgOf(D))+'% today).';
  if(/accuracy|model|performance|backtest/.test(q))return 'Walk-forward backtest for '+D.sym+': price + sentiment model got direction right '+D.acc+'% of the time vs '+D.base+'% for a momentum baseline.';
  if(f)return 'Now showing '+D.sym+'. Ask about its price, sentiment, news or prediction.';
  return 'I can answer about price, sentiment, news, predictions and model accuracy. Try: "predict TSLA".'}
-function ask(t){if(!t.trim())return;say(t,'me');say(reply(t),'bot');$('q').value=''}
-$('send').onclick=()=>ask($('q').value);$('q').onkeydown=e=>{if(e.key==='Enter')ask($('q').value)};
-['What is the sentiment?','Predict tomorrow','Show news','Model accuracy','Price of TSLA'].forEach(t=>{const b=document.createElement('button');b.className='chip';b.textContent=t;b.onclick=()=>ask(t);$('chips').append(b)});
-render();say('Hi! I am the SentiTrade assistant. Ask me about price, sentiment, news or predictions.','bot');
+function ask(t){if(!t.trim())return;say(t,'me');$$('q').value='';const d=say('','bot');d.classList.add('typing');d.innerHTML='<i></i><i></i><i></i>';
+ setTimeout(()=>{d.classList.remove('typing');d.textContent=reply(t);$$('chat').scrollTop=1e9},600)}
+$$('send').onclick=()=>ask($$('q').value);$$('q').onkeydown=e=>{if(e.key==='Enter')ask($$('q').value)};
+['What is the sentiment?','Predict tomorrow','Show news','Model accuracy','Price of TSLA','Which stock is most bullish?'].forEach(t=>{const b=document.createElement('button');b.className='chip';b.textContent=t;b.onclick=()=>ask(t);$$('chips').append(b)});
+api();render();analyze();say('Hi! I am the SentiTrade assistant. Ask me about price, sentiment, news or predictions.','bot');
 </script></body></html>
